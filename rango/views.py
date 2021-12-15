@@ -7,8 +7,10 @@ def index(request):
     # Display top level liked 5 categories in main page
     # get list of 5 categories by order 
     category_list = Category.objects.order_by("-likes")[:5]
+    page_list = Page.objects.order_by("-views")[:5]
     context_dic = {
-        "categories": category_list
+        "categories": category_list,
+        "pages": page_list
     }
     '''
     context_dic = {

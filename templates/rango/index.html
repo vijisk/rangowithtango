@@ -17,6 +17,7 @@
         </div>
 
         <div>
+            <strong>Most Liked Categories</strong>
             {% if categories %}
             <u1>
                 {% for cat in categories %}
@@ -28,7 +29,22 @@
             {% else %}
                 <strong> There are no categories available. </strong>
             {% endif %}
+        </div><br/>
+        <div>
+            <strong>Most Viewed Pages</strong>
+            {% if pages %}
+            <u1>
+                {% for page in pages %}
+                    <li> 
+                        <a href="{{ page.url }}"> {{page.title}} </a>
+                    </li>
+                {% endfor%}
+            </u1>
+            {% else %}
+                <strong> There are no Pages available. </strong>
+            {% endif %}
         </div>
+
         <div>
             <a href="/rango/about">About</a><br/>
             <img src="{% static "images/flower.jpeg" %}"
