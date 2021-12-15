@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %} <!-- New line -->
+<html>
+    <head>
+        <title>Rango About Page</title>
+    </head>
+    <body>
+        <h1>Rango says ...</h1>
+        <div>
+            This tutorial had been put together by <strong>{{username}} </strong><br/>
+        </div>
+        <div>
+            <a href="/rango/">Main Page</a><br/>
+            <img src="{{ MEDIA_URL }}cat.jpg" 
+                alt="Picture of cat" /> <!-- New line -->
+        </div>
+    </body>
+</html>
