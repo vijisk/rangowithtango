@@ -15,6 +15,20 @@
             hey there partner!<br/>
             <strong>{{boldmessage}}</strong> <br/>
         </div>
+
+        <div>
+            {% if categories %}
+            <u1>
+                {% for cat in categories %}
+                    <li> 
+                        <a href="/rango/category/{{ cat.slug}}"> {{cat.name}} </a>
+                    </li>
+                {% endfor%}
+            </u1>
+            {% else %}
+                <strong> There are no categories available. </strong>
+            {% endif %}
+        </div>
         <div>
             <a href="/rango/about">About</a><br/>
             <img src="{% static "images/flower.jpeg" %}"
