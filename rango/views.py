@@ -1,7 +1,9 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from rango.models import Category, Page
+from rango.forms import CategoryForm, PageForm
 
 def index(request):
     # Display top level liked 5 categories in main page
@@ -54,3 +56,49 @@ def about(request):
     html='Rango says here is the about page. <br\> <a href="/rango/">Main Page</a>'
     return HttpResponse(html)'''
     return render(request, "rango/about.html", context=context_dic)
+
+
+
+def add_category(request):
+    form = CategoryForm()
+
+    # HTTP POST
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print(form.errors)
+
+    return render(request, "rango/add_category.html", {'form': form})
+
+def add_page(request, slug_category_name):
+    try:
+        category = Category.objects.get(slug=slug_category_name)
+    except DoesNotExist:
+        category = None
+
+    if not category:
+        return index(request)
+
+    form = PageForm()
+
+    if request.method == "POST":
+        form = PageForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                page = form.save(commit=False)
+                page.category = category
+                page.views = 0
+                page.save()
+                return show_category(request, slug_category_name)
+        else:
+            print(form.errors)
+
+    context_dict = {
+        "form": form,
+        "category": category
+    }
+    return render(request, "rango/add_page.html", context_dict)
