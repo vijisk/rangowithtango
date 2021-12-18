@@ -15,7 +15,7 @@
                     {% endfor %}
                 </u1>
                 <br>
-                <a href="/rango/category/{{ category.slug }}/add_page">Add a New Page</a>
+                <a href="{% url 'rango:add_page' category.slug %}">Add a New Page</a>
                 {% else %}
                     <strong> No Pages currently in Category {{category}} </strong>
                 {% endif %}

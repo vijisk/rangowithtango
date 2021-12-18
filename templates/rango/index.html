@@ -22,7 +22,7 @@
             <u1>
                 {% for cat in categories %}
                     <li> 
-                        <a href="/rango/category/{{ cat.slug}}"> {{cat.name}} </a>
+                        <a href="{% url 'rango:show_category' cat.slug %}"> {{cat.name}} </a>
                     </li>
                 {% endfor%}
             </u1>
@@ -45,10 +45,10 @@
             {% endif %}
         </div><br/>
 
-        <a href="/rango/add_category/">Add a New Category </a><br />
+        <a href="{% url 'rango:add_category' %}">Add a New Category </a><br />
         
         <div>
-            <a href="/rango/about">About</a><br/><br/>
+            <a href="{% url 'rango:about' %}">About</a><br/><br/>
             <img src="{% static "images/flower.jpeg" %}"
                 alt="Picture of Rango" /> <!-- New line -->
         </div>
