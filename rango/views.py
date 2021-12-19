@@ -46,7 +46,7 @@ def show_category(request, slug_category_name):
         context_dic['category'] = None
         context_dic['pages'] = None
 
-    return render(request, "rango/category.html", context_dic)
+    return render(request, "rango/category_base.html", context_dic)
 
 def about(request):
     context_dic = {
