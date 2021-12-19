@@ -10,7 +10,7 @@
         {% if categories %}
         <ul>
             {% for cat in categories %}
-                <li><a href="{{ cat.slug }}">{{ cat.name }}</a></li>
+                <li><a href="{% url 'rango:show_category' cat.slug %}">{{ cat.name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}
