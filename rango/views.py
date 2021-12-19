@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from rango.models import Category, Page
-from rango.forms import CategoryForm, PageForm
+from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 
 def index(request):
@@ -142,3 +142,35 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
     # Update/set the visits cookie
     request.session['visits'] = visits
+
+def register(request):
+    registered = False
+    user_form = UserForm()
+    user_profile_form = UserProfileForm()
+
+    if request.method == "POST":
+        user_form = UserProfileForm(request.POST)
+        user_profile_form = UserProfileForm(request.POST)
+
+        if user_form.is_valid and user_profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            
+            profile = user_profile_form.save(commit=False)
+            profile.user = user
+            if "picture" in request.FILES:
+                profile.picture = request.FILES["picture"]
+            profile.save()
+
+            registered = True
+        else:
+            print(user_form.errors, user_profile_form.errors)            
+        
+    context_dic = {
+        "user_form": user_form,
+        "user_profile_form": user_profile_form,
+        "registered": registered
+    }
+
+    return render(request, "rango/register.html", context_dic)
