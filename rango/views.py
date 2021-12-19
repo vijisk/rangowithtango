@@ -20,7 +20,7 @@ def index(request):
     }
     html='Rango says hey there partner! <br\> <a href="/rango/about/">About</a>'
     return HttpResponse(html)'''
-    return render(request, 'rango/index.html', context=context_dic)
+    return render(request, 'rango/index_base.html', context=context_dic)
 
 def show_category(request, slug_category_name):
     context_dic = {}
@@ -55,7 +55,7 @@ def about(request):
     '''
     html='Rango says here is the about page. <br\> <a href="/rango/">Main Page</a>'
     return HttpResponse(html)'''
-    return render(request, "rango/about.html", context=context_dic)
+    return render(request, "rango/about_base.html", context=context_dic)
 
 
 
@@ -71,7 +71,7 @@ def add_category(request):
         else:
             print(form.errors)
 
-    return render(request, "rango/add_category.html", {'form': form})
+    return render(request, "rango/add_category_base.html", {'form': form})
 
 def add_page(request, slug_category_name):
     try:
@@ -101,4 +101,4 @@ def add_page(request, slug_category_name):
         "form": form,
         "category": category
     }
-    return render(request, "rango/add_page.html", context_dict)
+    return render(request, "rango/add_page_base.html", context_dict)

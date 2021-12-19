@@ -1,0 +1,37 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    <h1> Hey There Partner!! </h1><br>
+    <strong>{{ boldmessage }} </strong>
+
+    <div>
+        <strong>Most liked Categories </strong>
+        {% if categories %}
+        <ul>
+            {% for cat in categories %}
+                <li><a href="{{ cat.slug }}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong> There are no categories available. </strong>
+        {% endif %}
+        <br>
+    </div>
+
+    <div>
+        <strong> Most liked Pages </strong><br>
+        {% if pages %}
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no pages available.</strong>
+        {% endif %}
+    </div>
+    <br>
+    <img src="{% static 'images/flower.jpeg' %}" alt="Picture of flower" />
+
+{% endblock %}
