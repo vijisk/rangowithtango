@@ -6,9 +6,15 @@
 {% endblock %}
 
 {% block body_block %}
-    <div>
-        This tutorial had been put together by <strong>{{username}}</strong><br/>
-        Visits: {{ visits }} 
+    <div class="jumbotron p-2">
+        <div class="container">
+            <h1 class="jumbotron-heading">About</h1>
+        </div>
+    </div>
+    <strong>
+        This tutorial had been put together by {{user.username}}<br/>
+        Visits: {{ visits }} </strong>
+
     </div>
     </br>
     <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of cat" />

@@ -16,7 +16,8 @@ def index(request):
     page_list = Page.objects.order_by("-views")[:5]
     context_dic = {
         "categories": category_list,
-        "pages": page_list
+        "pages": page_list,
+        "boldmessage": "Creamy, Crunchy, Candy, cupcake"
     }
 
     request.session.set_test_cookie()

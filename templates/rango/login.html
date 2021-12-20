@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block body_block %}
-    <strong> Login to Rango!! </strong>
+    <div class="jumbotron p-4">  
+        <div class="container">
+            <h1 class="jumbotron-heading">Login</h1>
+        </div>    
+    </div>
     <div>
         <form id="login_form" method="post" action="{% url 'rango:login' %}" >
             {% csrf_token %}
