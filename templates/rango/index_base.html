@@ -2,7 +2,14 @@
 {% load static %}
 
 {% block body_block %}
-    <h1> Hey There Partner!! </h1><br>
+    <h1>
+        {% if user.is_authenticated %}
+            Howdy {{user.username }}!!
+        {% else %}
+            Hey there Partner!!
+        {% endif %}
+    </h1>
+
     <strong>{{ boldmessage }} </strong>
 
     <div>
