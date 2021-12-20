@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.contrib.auth.decorator import login_required
+from django.contrib.auth.decorators import login_required
 
 from rango.models import Category, Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
@@ -72,7 +72,7 @@ def about(request):
     return render(request, "rango/about_base.html", context=context_dic)
 
 
-
+@login_required
 def add_category(request):
     form = CategoryForm()
 
@@ -85,8 +85,10 @@ def add_category(request):
         else:
             print(form.errors)
 
+
     return render(request, "rango/add_category_base.html", {'form': form})
 
+@login_required
 def add_page(request, slug_category_name):
     try:
         category = Category.objects.get(slug=slug_category_name)
@@ -146,6 +148,7 @@ def visitor_cookie_handler(request):
     # Update/set the visits cookie
     request.session['visits'] = visits
 
+'''
 def register(request):
     registered = False
     user_form = UserForm()
@@ -198,12 +201,15 @@ def user_login(request):
     return render(request, 'rango/login.html', {})
 
 @login_required
-def restricted(request):
-    return HttpResponse("Since you are logged in, you can see the content!!")
-
-@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rango:index'))
 
 
+'''
+
+
+@login_required
+def restricted(request):
+    return render(request, 'rango/restricted.html', {})
+    #return HttpResponse("Since you are logged in, you can see the content!!")
